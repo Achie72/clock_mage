@@ -2,9 +2,9 @@
 A platformer-roguelike entry for the MyLittleRogueLikeJam1
 
 
-[**Play in browser**](https://achie72.github.io/switch-jump/)
-[Itch page](https://achie.itch.io/clock-mage)  
-[Full Moon Game Jam page](https://itch.io/jam/mylittleroguelike1/entries)
+[**Play in browser**](https://achie72.github.io/clock_mage/)  
+[Itch page](https://achie.itch.io/clock-mage)    
+[Full Moon Game Jam page](https://itch.io/jam/mylittleroguelike1/entries)  
 [Ko-fi Article](https://ko-fi.com/post/NdabJam-results-MyLittleRogueLikeJam1-Twitter-S-I3I01Q6AG)  
 
 ---  
@@ -27,9 +27,11 @@ On each stage there will be urns, chest and shrines waiting for you. Urns will g
 
 Dropped spells will dissapear in 10 seconds, so if you don't want to switch your current one out, just leave it be. ARCANE MINES ARE NOT IMPLEMENTED, SKIP THEM!
 
-In Addition the game can drop rune shard which you can spend by pressing "Select"/Enter and entering the forge menu.
+**Forging Runes:**  
 
+In Addition the game can drop rune shard which you can spend by pressing "Select"/Enter and entering the forge menu. You can forge runes from rune shards enemies drop at random.  
 
+**Runes:**  
 
 Blood Rune: Increases health.   
 Water rune: Life regen.  
@@ -39,6 +41,7 @@ Thunder Rune: Damage
 Wave Rune: Attack speed (NOT IMPLEMENTED)  
 Each cost 1 point to upgrade, and on each successful level you gain 4 shards!  
 
+**Spells:**  
 
 Fireball: Basic spell. One projectile, fast reloading.  
 Flamelance: Piercing Spell!  
@@ -51,11 +54,11 @@ Arcane Mine: Not Working!
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L4L81GBPX)
 
-**Social media:**
+**Social media:**  
 
-[Follow me on Twitter](https://twitter.com/Achie7240) 
-[Follow me on Instagram](https://www.instagram.com/justanerdlife/)
-[Follow me on Twitch](https://www.twitch.tv/achie7240)
+[Follow me on Twitter](https://twitter.com/Achie7240)  
+[Follow me on Instagram](https://www.instagram.com/justanerdlife/)  
+[Follow me on Twitch](https://www.twitch.tv/achie7240)  
 
 
 
