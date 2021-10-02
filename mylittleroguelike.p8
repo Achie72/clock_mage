@@ -183,6 +183,7 @@ function load_map(_index)
 	director.difficulty += 1
 	director.difficulty = director.difficulty * 1 + (flr(director.level/2))
 	director.cost *= director.difficulty
+	director.maxCredit *= director.difficulty
 
 	director.levelSpawnPoints = {}
 	director.teleporterActivated = false
@@ -286,7 +287,7 @@ end
 
 function _init()
 	--code()
-	music(0)
+	--music(0)
 end
 
 function unload_map()
@@ -980,6 +981,7 @@ function update_game()
 			printh(director.telerporterStatus)
 		end
 		if director.telerporterStatus >= 3 then
+			director.maxCredit = flr(director.maxCredit/2)
 			player.runes += 4
 			director.teleporterEnds = 0
 			director.teleporterActivated = false
@@ -1059,6 +1061,9 @@ function update_spells()
 			offset = 10
 		end
 		if (spell.tpe == 0) or (spell.tpe == 1) then
+			if (spell.tpe == 0) then
+				offset = -1
+			end
 			spell.x += spell.speed
 			add_particle(spell.x+offset*(2*spell.tpe),spell.y+4-spell.tpe,5,{9,5},0)
 			add_particle(spell.x+offset*(2*spell.tpe),spell.y+4+spell.tpe,5,{9,5},0)
@@ -1681,6 +1686,8 @@ function draw_menu()
 end
 
 function draw_game()
+	local xPos = player.x
+	local yPos = player.y
 	if not global.runeScene then
 		cls()
 		map()
@@ -1692,6 +1699,7 @@ function draw_game()
 		draw_containters()
 		draw_enemies()
 		draw_pickups()
+	
 		--draw_lightning()
 		if player.damageEnd > time() then
 			for i=1,100 do
@@ -1713,7 +1721,11 @@ function draw_game()
 		end
 
 		if player.isCastingSpell then
-			spr(96,player.x+8,player.y,1,1,not player.isFlipped,false)
+			if player.isFlipped then
+				spr(96,xPos-8,yPos,1,1,false,false)
+			else
+				spr(96,xPos+8,yPos,1,1,true,false)
+			end
 			if player.spellEquipped == 83 then
 				rectfill(0,0,999,999,5)
 			end
@@ -1722,46 +1734,46 @@ function draw_game()
 		draw_enemy_projectile()
 		draw_foliage()
 
-		camera(player.x-64,player.y-64)
+		camera(xPos-64,yPos-64)
 		draw_ui()
 	else
 		-- outer layer
-		rectfill(player.x-45,player.y-45,player.x+45,player.y+45,9)
-		rectfill(player.x-44,player.y-44,player.x+44,player.y+44,0)
+		rectfill(xPos-45,yPos-45,xPos+45,yPos+45,9)
+		rectfill(xPos-44,yPos-44,xPos+44,yPos+44,0)
 		-- headline
-		rectfill(player.x-45,player.y-35,player.x+45,player.y-35,9)
-		print("rune shards: "..player.runes,player.x-42,player.y-42,6)
+		rectfill(xPos-45,yPos-35,xPos+45,yPos-35,9)
+		print("rune shards: "..player.runes,xPos-42,yPos-42,6)
 
 		--health
-		print("blood rune:",player.x-32,player.y-32,6)
-		spr(143,player.x-42,player.y-33)
-		print(player.runesForged[1],player.x+30,player.y-32,9)
+		print("blood rune:",xPos-32,yPos-32,6)
+		spr(143,xPos-42,yPos-33)
+		print(player.runesForged[1],xPos+30,yPos-32,9)
 		--regen
-		print("water rune:",player.x-32,player.y-24,6)
-		spr(159,player.x-42,player.y-25)
-		print(player.runesForged[2],player.x+30,player.y-24,9)
+		print("water rune:",xPos-32,yPos-24,6)
+		spr(159,xPos-42,yPos-25)
+		print(player.runesForged[2],xPos+30,yPos-24,9)
 		--defense
-		print("earth rune:",player.x-32,player.y-16,6)
-		spr(175,player.x-42,player.y-17)
-		print(player.runesForged[3],player.x+30,player.y-16,9)
+		print("earth rune:",xPos-32,yPos-16,6)
+		spr(175,xPos-42,yPos-17)
+		print(player.runesForged[3],xPos+30,yPos-16,9)
 		--speedBoost
-		print("wind rune:",player.x-32,player.y-8,6)
-		spr(191,player.x-42,player.y-9)
-		print(player.runesForged[4],player.x+30,player.y-8,9)
+		print("wind rune:",xPos-32,yPos-8,6)
+		spr(191,xPos-42,yPos-9)
+		print(player.runesForged[4],xPos+30,yPos-8,9)
 		--damage
-		print("thunder rune:",player.x-32,player.y,6)
-		spr(142,player.x-42,player.y-1)
-		print(player.runesForged[5],player.x+30,player.y,9)
+		print("thunder rune:",xPos-32,yPos,6)
+		spr(142,xPos-42,yPos-1)
+		print(player.runesForged[5],xPos+30,yPos,9)
 		--attackspeed
-		print("wave rune:",player.x-32,player.y+8,6)
-		spr(158,player.x-42,player.y+7)
-		print(player.runesForged[6],player.x+30,player.y+8,9)
+		print("wave rune:",xPos-32,yPos+8,6)
+		spr(158,xPos-42,yPos+7)
+		print(player.runesForged[6],xPos+30,yPos+8,9)
 		-- indicator
-		spr(81,player.x+20,player.y-34+(global.runeIndicator*8))
+		spr(81,xPos+20,yPos-34+(global.runeIndicator*8))
 
 		--instruction
-		print("\151-exit",player.x+14,player.y+36,9)
-		print("\142-forge",player.x-42,player.y+36,9)
+		print("\151-exit",xPos+14,yPos+36,9)
+		print("\142-forge",xPos-42,yPos+36,9)
 
 
 	end
@@ -1836,7 +1848,6 @@ function draw_particles()
 			pset(part.x,part.y,part.clr)
 		end
 	end
-
 end
 
 function draw_containters()
@@ -1871,20 +1882,22 @@ end
 function draw_ui()
 
 	local elapsedTime = director.mins..":"..director.secs
+	local xPos = player.x
+	local yPos = player.y
 	-- border
 	--rectfill(player.x-64,player.y-64,player.x+80,player.y-52,0)
 	--rectfill(player.x-64,player.y-53,player.x+80,player.y-53,6)
-	spr(113,player.x-64,player.y-64)
-	print(":"..player.life.."/"..player.maxLife,player.x-57,player.y-62,9)
+	spr(113,xPos-64,yPos-64)
+	print(":"..player.life.."/"..player.maxLife,xPos-57,yPos-62,9)
 	-- regen
 	if (global.regen > time()) then
-		print("+"..(1 + flr(0.5 * player.runesForged[2])),player.x-20,player.y-62,9)
+		print("+"..(1 + flr(0.5 * player.runesForged[2])),xPos-20,yPos-62,9)
 	end
-	spr(112,player.x-64,player.y-52)
-	print(":"..player.souls,player.x-57,player.y-50,9)
+	spr(112,xPos-64,yPos-52)
+	print(":"..player.souls,xPos-57,yPos-50,9)
 
-	spr(114,player.x+56,player.y-63)
-	print(elapsedTime,player.x+46-(#elapsedTime*2),player.y-62,9)
+	spr(114,xPos+56,yPos-63)
+	print(elapsedTime,xPos+46-(#elapsedTime*2),yPos-62,9)
 
 	if global.onContainer then
 		print(global.containerText,global.textPoint.x-(#global.containerText*2),
@@ -1892,48 +1905,48 @@ function draw_ui()
 	end
 	--rect(crect.x1,crect.y1,crect.x2,crect.y2,10)
 
-	--print(stat(1),player.x  - 62, player.y - 30, 9)
+	--print(stat(1),xPos  - 62, yPos - 30, 9)
 
 
 	-- level name display
 	if levelEntered > time() then
-		rectfill(player.x-(#director.mapName*2)-4,player.y - 34,player.x+(#director.mapName*2)+2,player.y - 22,6)
-		rectfill(player.x-(#director.mapName*2)-3,player.y - 33,player.x+(#director.mapName*2)+1,player.y - 23,0)
-		print(director.mapName,player.x-(#director.mapName*2),player.y - 30,9)
+		draw_box(xPos-(#director.mapName*2)-4,yPos - 34,xPos+(#director.mapName*2)+2,yPos - 22,6,0)
+		print(director.mapName,xPos-(#director.mapName*2),yPos - 30,9)
 	end
 
 	--- initation state display
-	if (director.teleporterActivated) and (abs(player.x - director.teleporterPosition.x) < 64) and (abs(player.y - director.teleporterPosition.y) < 64) then
+	if (director.teleporterActivated) and (abs(xPos - director.teleporterPosition.x) < 64) and (abs(yPos - director.teleporterPosition.y) < 64) then
 		spr(116 + director.telerporterStatus, director.teleporterPosition.x-(sin(rnd(1))), director.teleporterPosition.y-cos(rnd(1)))
 		print(flr(director.teleporterEnds - time()),director.teleporterPosition.x,director.teleporterPosition.y-8)
 	elseif (director.teleporterActivated) then
-		rectfill(player.x-2,player.y - 64,player.x+9,player.y - 54,9)
-		rectfill(player.x-1,player.y - 63,player.x+8,player.y - 55,0)
-		print(flr(director.teleporterEnds - time()),player.x+1-sin(rnd()),player.y - 61,9)
+		draw_box(xPos-2,yPos - 64,xPos+9,yPos - 54,9,0)
+		print(flr(director.teleporterEnds - time()),xPos+1-sin(rnd()),yPos - 61,9)
 	end
 	-- spell slot draw
 	-- left one
-	rectfill(player.x-64,player.y + 52,player.x-53,player.y + 63,9)
-	rectfill(player.x-63,player.y + 53,player.x-54,player.y + 62,0)
-	spr(80+player.spellEquipped,player.x-62,player.y+54)
-	if player.equippedCd > 0 then print(flr(player.equippedCd),player.x-58,player.y+46,9) end
+	draw_box(xPos-64,yPos + 52,xPos-53,yPos + 63,9,0)
+	spr(80+player.spellEquipped,xPos-62,yPos+54)
+	if player.equippedCd > 0 then print(flr(player.equippedCd),xPos-58,yPos+46,9) end
 	
 
-	rectfill(player.x-52,player.y + 52,player.x-41,player.y + 63,5)
-	rectfill(player.x-51,player.y + 53,player.x-42,player.y + 62,0)
+	draw_box(xPos-52,yPos + 52,xPos-41,yPos + 63,5,0)
 	pal(9,5)
-	spr(80+player.spellInInventory,player.x-50,player.y+54)
-	if player.invCd > 0  then print(flr(player.invCd),player.x-46,player.y+46,9) end
+	spr(80+player.spellInInventory,xPos-50,yPos+54)
+	if player.invCd > 0  then print(flr(player.invCd),xPos-46,yPos+46,9) end
 	pal()
 
 	--runePickupEnd
 	if global.runePickupEnd > time() then
 		local runeText = "rune shard +1"
 		local runeInst = "enter to forge"
-		print(runeText,player.x-(#runeText*2),player.y-24,9)
-		print(runeInst,player.x-(#runeInst*2),player.y-16,9)
+		print(runeText,xPos-(#runeText*2),yPos-24,9)
+		print(runeInst,xPos-(#runeInst*2),yPos-16,9)
 	end
+end
 
+function draw_box(x1,y1,x2,y2,color1,color2)
+		rectfill(x1,y1,x2,y2,color1)
+		rectfill(x1+1,y1+1,x2-1,y2-1,color2)
 end
 
 function draw_foliage()
@@ -1955,10 +1968,7 @@ function draw_enemy_projectile()
 			spr(proj.spr,proj.x,proj.y)
 		end
 	end
-
 end
-
-
 
 function draw_transition(_x,_y)
 	local dither = {…,░,▤,█}
