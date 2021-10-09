@@ -7,6 +7,8 @@ A platformer-roguelike entry for the MyLittleRogueLikeJam1
 [Full Moon Game Jam page](https://itch.io/jam/mylittleroguelike1/entries)  
 [Ko-fi Article](https://ko-fi.com/post/NdabJam-results-MyLittleRogueLikeJam1-Twitter-S-I3I01Q6AG)  
 
+You can download your version of choice from `exports`.
+
 ---  
 
 **Movement:**  
