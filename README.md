@@ -1,6 +1,7 @@
 # clock_mage
 A platformer-roguelike entry for the MyLittleRogueLikeJam1
 
+![alt text](https://img.itch.zone/aW1hZ2UvNjY1MzM3LzM1OTMyMzYuZ2lm/347x500/sm56oj.gif)
 
 [**Play in browser**](https://achie72.github.io/clock_mage/)  
 [Itch page](https://achie.itch.io/clock-mage)    
@@ -58,14 +59,17 @@ Arcane Mine: Not Working!
 
 **Social media:**  
 
-[Follow me on Twitter](https://twitter.com/Achie7240)  
-[Follow me on Instagram](https://www.instagram.com/justanerdlife/)  
-[Follow me on Twitch](https://www.twitch.tv/achie7240)  
+Other social sites:  
+🐦 [Twitter](https://twitter.com/Achie7240)  
+📷 [Instagram](https://www.instagram.com/justanerdlife/)  
+🎥 [Twitch](https://www.twitch.tv/achie7240)  
+🎬 [YouTube](https://www.youtube.com/channel/UCzWXrvo-Pj7_KDv4w4q-4Kg)  
 
 
+Games and devlogs i made:
+⌨️ [GitHub repos](https://github.com/Achie72)  
+🎮 [Itch.io](https://achie.itch.io/)  
+🕹️ [Newgrounds](https://achie72.newgrounds.com/)  
 
-
-
-
-
-
+All my links in one place:  
+🌳 [Linktr.ee](https://linktr.ee/AchieGameDev)   
